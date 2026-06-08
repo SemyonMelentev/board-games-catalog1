@@ -8,7 +8,6 @@ const gameDetails = document.getElementById("gameDetails");
 
 if (!game) {
 
-```
 gameDetails.innerHTML = `
     <div class="game-card">
         <h2>Игра не найдена</h2>
@@ -19,11 +18,9 @@ gameDetails.innerHTML = `
         </a>
     </div>
 `;
-```
 
 } else {
 
-```
 document.title = game.title;
 
 gameDetails.innerHTML = `
@@ -71,6 +68,5 @@ gameDetails.innerHTML = `
 
     </div>
 `;
-```
 
 }
