@@ -16,8 +16,9 @@ container.innerHTML = "";
 if (list.length === 0) {
 
     container.innerHTML = `
-        <h2>Ничего не найдено 😔</h2>
-    `;
+       container.innerHTML = `
+    <h2>Ничего не найдено 😔</h2>
+`;
 
     return;
 }
