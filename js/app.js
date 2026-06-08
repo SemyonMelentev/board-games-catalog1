@@ -2,23 +2,20 @@ const container = document.getElementById("gamesContainer");
 const searchInput = document.getElementById("search");
 const genreFilter = document.getElementById("genreFilter");
 
-// Загружаем пользовательские игры из localStorage
 const savedGames =
 JSON.parse(localStorage.getItem("customGames")) || [];
 
-// Добавляем их к основному каталогу
 games.push(...savedGames);
 
 function renderGames(list) {
-
 
 container.innerHTML = "";
 
 if (list.length === 0) {
 
-    container.innerHTML = 
+    container.innerHTML = `
         <h2>Ничего не найдено 😔</h2>
-    ;
+    `;
 
     return;
 }
@@ -29,11 +26,11 @@ list.forEach(game => {
 
     card.classList.add("card");
 
-    card.innerHTML = 
-
-        <img src="${game.image}"
-             alt="${game.title}"
-             onerror="this.src='https://via.placeholder.com/400x550?text=${encodeURIComponent(game.title)}'">
+    card.innerHTML = `
+        <img
+            src="${game.image}"
+            alt="${game.title}"
+            onerror="this.src='https://via.placeholder.com/400x550?text=${encodeURIComponent(game.title)}'">
 
         <div class="card-content">
 
@@ -59,24 +56,22 @@ list.forEach(game => {
                 ⭐ Рейтинг: ${game.rating}
             </div>
 
-            <a class="details-btn"
-               href="game.html?id=${game.id}">
+            <a
+                class="details-btn"
+                href="game.html?id=${game.id}">
                 Подробнее
             </a>
 
         </div>
-
-    ;
+    `;
 
     container.appendChild(card);
 
 });
 
-
 }
 
 function filterGames() {
-
 
 const searchValue =
     searchInput.value.toLowerCase();
@@ -96,12 +91,14 @@ const filteredGames =
             selectedGenre === "all" ||
             game.genre === selectedGenre;
 
-        return matchesSearch && matchesGenre;
+        return (
+            matchesSearch &&
+            matchesGenre
+        );
 
     });
 
 renderGames(filteredGames);
-
 
 }
 
@@ -115,10 +112,7 @@ genreFilter.addEventListener(
 filterGames
 );
 
-// Первый запуск
 renderGames(games);
-
-// ===== ДОБАВЛЕНИЕ ИГР =====
 
 const addGameBtn =
 document.getElementById("addGameBtn");
@@ -130,7 +124,6 @@ const saveGameBtn =
 document.getElementById("saveGameBtn");
 
 if (addGameBtn && gameFormContainer) {
-
 
 addGameBtn.addEventListener("click", () => {
 
@@ -149,11 +142,9 @@ addGameBtn.addEventListener("click", () => {
 
 });
 
-
 }
 
 if (saveGameBtn) {
-
 
 saveGameBtn.addEventListener("click", () => {
 
@@ -208,6 +199,5 @@ saveGameBtn.addEventListener("click", () => {
     document.getElementById("newDescription").value = "";
 
 });
-
 
 }
