@@ -11,7 +11,6 @@ games.push(...savedGames);
 
 function renderGames(list) {
 
-```
 container.innerHTML = "";
 
 if (list.length === 0) {
@@ -71,13 +70,11 @@ list.forEach(game => {
     container.appendChild(card);
 
 });
-```
 
 }
 
 function filterGames() {
 
-```
 const searchValue =
     searchInput.value.toLowerCase();
 
@@ -104,7 +101,6 @@ const filteredGames =
     });
 
 renderGames(filteredGames);
-```
 
 }
 
@@ -134,7 +130,6 @@ document.getElementById("saveGameBtn");
 
 if (addGameBtn) {
 
-```
 addGameBtn.addEventListener("click", () => {
 
     if (
@@ -151,13 +146,11 @@ addGameBtn.addEventListener("click", () => {
     }
 
 });
-```
 
 }
 
 if (saveGameBtn) {
 
-```
 saveGameBtn.addEventListener("click", () => {
 
     const newGame = {
@@ -211,6 +204,5 @@ saveGameBtn.addEventListener("click", () => {
     document.getElementById("newDescription").value = "";
 
 });
-```
 
 }
