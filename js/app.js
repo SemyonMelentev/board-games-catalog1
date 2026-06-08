@@ -29,7 +29,7 @@ list.forEach(game => {
 
     card.classList.add("card");
 
-    card.innerHTML = `
+    card.innerHTML = 
 
         <img src="${game.image}"
              alt="${game.title}"
