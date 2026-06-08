@@ -2,7 +2,7 @@ const container = document.getElementById("gamesContainer");
 const searchInput = document.getElementById("search");
 const genreFilter = document.getElementById("genreFilter");
 
-// Загружаем пользовательские игры
+// Загружаем пользовательские игры из localStorage
 const savedGames =
 JSON.parse(localStorage.getItem("customGames")) || [];
 
@@ -11,14 +11,14 @@ games.push(...savedGames);
 
 function renderGames(list) {
 
+
 container.innerHTML = "";
 
 if (list.length === 0) {
 
     container.innerHTML = `
-       container.innerHTML = `
-    <h2>Ничего не найдено 😔</h2>
-`;
+        <h2>Ничего не найдено 😔</h2>
+    ;
 
     return;
 }
@@ -72,9 +72,11 @@ list.forEach(game => {
 
 });
 
+
 }
 
 function filterGames() {
+
 
 const searchValue =
     searchInput.value.toLowerCase();
@@ -94,14 +96,12 @@ const filteredGames =
             selectedGenre === "all" ||
             game.genre === selectedGenre;
 
-        return (
-            matchesSearch &&
-            matchesGenre
-        );
+        return matchesSearch && matchesGenre;
 
     });
 
 renderGames(filteredGames);
+
 
 }
 
@@ -115,10 +115,10 @@ genreFilter.addEventListener(
 filterGames
 );
 
-// Первый рендер
+// Первый запуск
 renderGames(games);
 
-// Работа формы добавления игры
+// ===== ДОБАВЛЕНИЕ ИГР =====
 
 const addGameBtn =
 document.getElementById("addGameBtn");
@@ -129,7 +129,8 @@ document.getElementById("gameFormContainer");
 const saveGameBtn =
 document.getElementById("saveGameBtn");
 
-if (addGameBtn) {
+if (addGameBtn && gameFormContainer) {
+
 
 addGameBtn.addEventListener("click", () => {
 
@@ -148,9 +149,11 @@ addGameBtn.addEventListener("click", () => {
 
 });
 
+
 }
 
 if (saveGameBtn) {
+
 
 saveGameBtn.addEventListener("click", () => {
 
@@ -205,5 +208,6 @@ saveGameBtn.addEventListener("click", () => {
     document.getElementById("newDescription").value = "";
 
 });
+
 
 }
