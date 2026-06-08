@@ -1,6 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 
-const gameId = parseInt(params.get("id"));
+const gameId = Number(params.get("id"));
 
 const game = games.find(item => item.id === gameId);
 
@@ -11,10 +11,6 @@ if (!game) {
 ```
 gameDetails.innerHTML = `
     <h2>Игра не найдена</h2>
-
-    <p style="margin-top:15px;">
-        Возможно, указан неверный ID игры.
-    </p>
 
     <a href="index.html" class="details-btn">
         Вернуться в каталог
@@ -45,18 +41,8 @@ gameDetails.innerHTML = `
     </p>
 
     <p class="info">
-        <strong>Год выпуска:</strong>
-        ${game.year}
-    </p>
-
-    <p class="info">
         <strong>Количество игроков:</strong>
         ${game.players}
-    </p>
-
-    <p class="info">
-        <strong>Время партии:</strong>
-        ${game.playTime}
     </p>
 
     <p class="info">
@@ -66,9 +52,7 @@ gameDetails.innerHTML = `
 
     <div class="game-description">
 
-        <h3>
-            Описание
-        </h3>
+        <h3>Описание</h3>
 
         <p>
             ${game.description}
