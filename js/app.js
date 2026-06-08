@@ -33,8 +33,16 @@ function renderGames(list) {
                 </div>
 
                 <div class="players">
-                    👥 Игроков: ${game.players}
-                </div>
+    👥 Игроков: ${game.players}
+</div>
+
+<div class="players">
+    📅 Год: ${game.year}
+</div>
+
+<div class="players">
+    ⏱️ Время партии: ${game.playTime}
+</div>
 
                 <div class="rating">
                     ⭐ Рейтинг: ${game.rating}
