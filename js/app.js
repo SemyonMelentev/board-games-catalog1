@@ -16,7 +16,7 @@ container.innerHTML = "";
 
 if (list.length === 0) {
 
-    container.innerHTML = `
+    container.innerHTML = 
         <h2>Ничего не найдено 😔</h2>
     ;
 
@@ -66,7 +66,7 @@ list.forEach(game => {
 
         </div>
 
-    `;
+    ;
 
     container.appendChild(card);
 
