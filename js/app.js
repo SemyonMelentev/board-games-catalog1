@@ -2,105 +2,215 @@ const container = document.getElementById("gamesContainer");
 const searchInput = document.getElementById("search");
 const genreFilter = document.getElementById("genreFilter");
 
+// Загружаем пользовательские игры
+const savedGames =
+JSON.parse(localStorage.getItem("customGames")) || [];
+
+// Добавляем их к основному каталогу
+games.push(...savedGames);
+
 function renderGames(list) {
 
-    container.innerHTML = "";
+```
+container.innerHTML = "";
 
-    if (list.length === 0) {
-        container.innerHTML = `
-            <h2>Ничего не найдено 😔</h2>
-        `;
-        return;
-    }
+if (list.length === 0) {
 
-    list.forEach(game => {
+    container.innerHTML = `
+        <h2>Ничего не найдено 😔</h2>
+    `;
 
-        const card = document.createElement("div");
-        card.classList.add("card");
+    return;
+}
 
-        card.innerHTML = `
+list.forEach(game => {
 
-            <img src="${game.image}"
-                 alt="${game.title}"
-                 onerror="this.src='https://via.placeholder.com/400x550?text=${encodeURIComponent(game.title)}'">
+    const card = document.createElement("div");
 
-            <div class="card-content">
+    card.classList.add("card");
 
-                <h3>${game.title}</h3>
+    card.innerHTML = `
 
-                <div class="genre">
-                    ${game.genre}
-                </div>
+        <img src="${game.image}"
+             alt="${game.title}"
+             onerror="this.src='https://via.placeholder.com/400x550?text=${encodeURIComponent(game.title)}'">
 
-                <div class="players">
-    👥 Игроков: ${game.players}
-</div>
+        <div class="card-content">
 
-<div class="players">
-    📅 Год: ${game.year}
-</div>
+            <h3>${game.title}</h3>
 
-<div class="players">
-    ⏱️ Время партии: ${game.playTime}
-</div>
-
-                <div class="rating">
-                    ⭐ Рейтинг: ${game.rating}
-                </div>
-
-                <a class="details-btn"
-                   href="game.html?id=${game.id}">
-                    Подробнее
-                </a>
-
+            <div class="genre">
+                ${game.genre}
             </div>
-        `;
 
-        container.appendChild(card);
+            <div class="players">
+                👥 Игроков: ${game.players || "-"}
+            </div>
 
-    });
+            <div class="players">
+                📅 Год: ${game.year || "-"}
+            </div>
+
+            <div class="players">
+                ⏱️ Время партии: ${game.playTime || "-"}
+            </div>
+
+            <div class="rating">
+                ⭐ Рейтинг: ${game.rating}
+            </div>
+
+            <a class="details-btn"
+               href="game.html?id=${game.id}">
+                Подробнее
+            </a>
+
+        </div>
+
+    `;
+
+    container.appendChild(card);
+
+});
+```
 
 }
 
-renderGames(games);
-
 function filterGames() {
 
-    const searchValue =
-        searchInput.value.toLowerCase();
+```
+const searchValue =
+    searchInput.value.toLowerCase();
 
-    const selectedGenre =
-        genreFilter.value;
+const selectedGenre =
+    genreFilter.value;
 
-    const filteredGames =
-        games.filter(game => {
+const filteredGames =
+    games.filter(game => {
 
-            const matchesSearch =
-                game.title
-                    .toLowerCase()
-                    .includes(searchValue);
+        const matchesSearch =
+            game.title
+                .toLowerCase()
+                .includes(searchValue);
 
-            const matchesGenre =
-                selectedGenre === "all" ||
-                game.genre === selectedGenre;
+        const matchesGenre =
+            selectedGenre === "all" ||
+            game.genre === selectedGenre;
 
-            return (
-                matchesSearch &&
-                matchesGenre
-            );
+        return (
+            matchesSearch &&
+            matchesGenre
+        );
 
-        });
+    });
 
-    renderGames(filteredGames);
+renderGames(filteredGames);
+```
 
 }
 
 searchInput.addEventListener(
-    "input",
-    filterGames
+"input",
+filterGames
 );
 
 genreFilter.addEventListener(
-    "change",
-    filterGames
+"change",
+filterGames
 );
+
+// Первый рендер
+renderGames(games);
+
+// Работа формы добавления игры
+
+const addGameBtn =
+document.getElementById("addGameBtn");
+
+const gameFormContainer =
+document.getElementById("gameFormContainer");
+
+const saveGameBtn =
+document.getElementById("saveGameBtn");
+
+if (addGameBtn) {
+
+```
+addGameBtn.addEventListener("click", () => {
+
+    if (
+        gameFormContainer.style.display === "none" ||
+        gameFormContainer.style.display === ""
+    ) {
+
+        gameFormContainer.style.display = "block";
+
+    } else {
+
+        gameFormContainer.style.display = "none";
+
+    }
+
+});
+```
+
+}
+
+if (saveGameBtn) {
+
+```
+saveGameBtn.addEventListener("click", () => {
+
+    const newGame = {
+
+        id: Date.now(),
+
+        title:
+            document.getElementById("newTitle").value,
+
+        genre:
+            document.getElementById("newGenre").value,
+
+        players:
+            document.getElementById("newPlayers").value,
+
+        rating:
+            Number(
+                document.getElementById("newRating").value
+            ),
+
+        image:
+            document.getElementById("newImage").value,
+
+        description:
+            document.getElementById("newDescription").value,
+
+        year: "-",
+
+        playTime: "-"
+
+    };
+
+    games.push(newGame);
+
+    savedGames.push(newGame);
+
+    localStorage.setItem(
+        "customGames",
+        JSON.stringify(savedGames)
+    );
+
+    renderGames(games);
+
+    gameFormContainer.style.display = "none";
+
+    document.getElementById("newTitle").value = "";
+    document.getElementById("newGenre").value = "";
+    document.getElementById("newPlayers").value = "";
+    document.getElementById("newRating").value = "";
+    document.getElementById("newImage").value = "";
+    document.getElementById("newDescription").value = "";
+
+});
+```
+
+}
